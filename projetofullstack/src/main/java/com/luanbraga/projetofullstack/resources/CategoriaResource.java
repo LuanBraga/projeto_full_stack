@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.luanbraga.projetofullstack.domain.Categoria;
 import com.luanbraga.projetofullstack.services.CategoriaService;
 
-
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {

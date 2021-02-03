@@ -8,8 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.luanbraga.projetofullstack.domain.Categoria;
+import com.luanbraga.projetofullstack.domain.Cidade;
+import com.luanbraga.projetofullstack.domain.Estado;
 import com.luanbraga.projetofullstack.domain.Produto;
 import com.luanbraga.projetofullstack.repositories.CategoriaRepository;
+import com.luanbraga.projetofullstack.repositories.CidadeRepository;
+import com.luanbraga.projetofullstack.repositories.EstadoRepository;
 import com.luanbraga.projetofullstack.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -20,6 +24,12 @@ public class ProjetofullstackApplication implements CommandLineRunner{
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetofullstackApplication.class, args);
@@ -44,6 +54,20 @@ public class ProjetofullstackApplication implements CommandLineRunner{
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		
+		Estado est1 = new Estado(null, "Minas Gerais");
+		Estado est2 = new Estado(null, "Rio de Janeiro");
+		
+		Cidade c1 = new Cidade(null, "Alto Caparaó", est1);
+		Cidade c2 = new Cidade(null,"Nova Iguaçu", est2);
+		Cidade c3 = new Cidade(null, "Queimados", est2);
+		
+		est1.getCidades().addAll(Arrays.asList(c1));
+		est2.getCidades().addAll(Arrays.asList(c2, c3));
+		
+		estadoRepository.saveAll(Arrays.asList(est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
 	}
 	
 

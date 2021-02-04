@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.luanbraga.projetofullstack.domain.Categoria;
 import com.luanbraga.projetofullstack.domain.Cidade;
+import com.luanbraga.projetofullstack.domain.Cliente;
+import com.luanbraga.projetofullstack.domain.Endereco;
 import com.luanbraga.projetofullstack.domain.Estado;
 import com.luanbraga.projetofullstack.domain.Produto;
+import com.luanbraga.projetofullstack.domain.enums.TipoCliente;
 import com.luanbraga.projetofullstack.repositories.CategoriaRepository;
 import com.luanbraga.projetofullstack.repositories.CidadeRepository;
+import com.luanbraga.projetofullstack.repositories.ClienteRepository;
+import com.luanbraga.projetofullstack.repositories.EnderecoRepository;
 import com.luanbraga.projetofullstack.repositories.EstadoRepository;
 import com.luanbraga.projetofullstack.repositories.ProdutoRepository;
 
@@ -30,6 +35,12 @@ public class ProjetofullstackApplication implements CommandLineRunner{
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetofullstackApplication.class, args);
@@ -67,6 +78,16 @@ public class ProjetofullstackApplication implements CommandLineRunner{
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		Cliente cli1 = new Cliente(null, "Letício", "leticio@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		
+		Endereco e1 = new Endereco(null, "Rua sem saída", "666", "casa 02", "Cabuçu", "38220834", cli1, c2);
+		Endereco e2 = new Endereco(null, "Rua do queijo", "171", "apto 420", "Centro", "36777012", cli1, c1);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		
 	}
 	

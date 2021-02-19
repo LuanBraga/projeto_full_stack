@@ -13,7 +13,7 @@ import com.luanbraga.projetofullstack.domain.Cliente;
 import com.luanbraga.projetofullstack.services.ClienteService;
 
 @RestController
-@RequestMapping(value="/cliente")
+@RequestMapping(value="/clientes")
 public class ClienteResource {
 	
 	@Autowired
